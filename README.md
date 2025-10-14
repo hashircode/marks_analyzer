@@ -1,4 +1,4 @@
-# ?? Student Marks Analyzer (Streamlit App) 
+#  Student Marks Analyzer (Streamlit App) 
 
 🎓 Student Marks Analyzer (Streamlit App)
 This is a simple, single-page web application built using Python, Streamlit, and Pandas. It is designed to help users input, manage, analyze, and visualize student performance data for Math, Science, and English.
