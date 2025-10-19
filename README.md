@@ -1,29 +1,23 @@
-#  Student Marks Analyzer (Streamlit App) 
+🎓 Student Marks Analyzer
 
-🎓 Student Marks Analyzer (Streamlit App)
-This is a simple, single-page web application built using Python, Streamlit, and Pandas. It is designed to help users input, manage, analyze, and visualize student performance data for Math, Science, and English.
-
+This application is a simple, browser-based tool built with Streamlit and Pandas for managing, analyzing, and visualizing student performance data across five subjects.
+ 
 ✨ Features
-Data Persistence: Student data (Name, Marks) is stored using Streamlit's session state (st.session_state) for continuity during the active user session.
 
-Data Management: Functionality to Add new student entries and Delete all records for a selected student.
+This analyzer focuses on  data management and performance visualization:
 
-Key Statistics: Displays average marks per subject and identifies top performers for each subject.
+📝 Add Marks: Easily input student names and their marks for 5 subjects (Math, Science, English, History, Art).
 
-Visualizations:
+📊 View Marks: Display the complete data table, including calculated Total scores, Grade (A-F), and the Overall Pass/Fail Status for each student.
 
-Comparison of overall Subject Average Marks.
+📈 Analyze Marks: Generate visualizations, including:
 
-Comparison of Student Total Marks (ranking).
+Total marks comparison chart for all students.
 
-🚀 Setup and Run
+Overall Pass/Fail count metrics and visualization.
 
-To run this application, you need to set up a Python environment and install the required dependencies listed in requirements.txt.
+❌ Delete Marks: Remove individual student records from the dataset.
 
-🛠️ Technologies Used
+Configurable Grading: Uses a specific grading scale based on a total of 500 marks, with a set pass mark of 50.0 per subject for an "Overall Pass" status.
 
-Python 3
-
-Streamlit: For the web interface and visualization.
-
-Pandas: For data handling, analysis (averages, totals), and data table display.
+The get_grade function applies the grades for each student according to their marks 
