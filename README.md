@@ -1,6 +1,8 @@
 🎓 Student Marks Analyzer
 
 This application is a simple, browser-based tool built with Streamlit and Pandas for managing, analyzing, and visualizing student performance data across five subjects.
+
+![img alt](https://github.com/hashircode/library_management_system/blob/d7844f7e96437e21836e06957554ca20267f3adb/ss.png)
  
 ✨ Features
 
