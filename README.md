@@ -2,7 +2,7 @@
 
 This application is a simple, browser-based tool built with Streamlit and Pandas for managing, analyzing, and visualizing student performance data across five subjects.
 
-
+![Marks Analyzer Screenshot](assets/screenshot.png)
  
 ✨ Features
 
