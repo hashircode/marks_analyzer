@@ -1,5 +1,6 @@
 import pandas as pd
 import streamlit as st
+<<<<<<< HEAD
 # Removed: import numpy as np
 
 # --- Configuration Constants ---
@@ -52,10 +53,33 @@ def analyze_marks():
     Focuses only on Total, Grade, and Overall Pass/Fail Status.
     Key statistics and top performers have been removed per user request.
     """
+=======
+PASS_MARK = 50.0 
+
+if 'df' not in st.session_state:
+    df_init = pd.DataFrame(columns=["Name", "Math", "Science", "English"])
+    df_init["Math"] = df_init["Math"].astype(float)
+    df_init["Science"] = df_init["Science"].astype(float)
+    df_init["English"] = df_init["English"].astype(float)
+    st.session_state.df = df_init
+
+
+def add_marks(name, math, science, english):
+
+    new_row = pd.DataFrame([[name, float(math), float(science), float(english)]], 
+                           columns=["Name", "Math", "Science", "English"])
+    st.session_state.df = pd.concat([st.session_state.df, new_row], ignore_index=True)
+
+def view_marks():
+    return st.session_state.df
+
+def analyze_marks():
+>>>>>>> f0d7049394a36c433188629a8b97a4fa43ac44ff
     df = st.session_state.df.copy()
     
     if df.empty:
         return "No data to analyze."
+<<<<<<< HEAD
     
     numerical_cols = SUBJECTS
     
@@ -141,6 +165,51 @@ def main():
         * F: <150
     """)
 
+=======
+
+    numerical_cols = ["Math", "Science", "English"]
+    for col in numerical_cols:
+        df[col] = pd.to_numeric(df[col], errors='coerce')
+
+    df['Total'] = df[numerical_cols].sum(axis=1)
+
+    analysis = {
+        "Math Average": df['Math'].mean(),
+        "Science Average": df['Science'].mean(),
+        "English Average": df['English'].mean(),
+   
+        "Highest Math Marks": f"{df['Math'].max()} by {df.loc[df['Math'].idxmax()]['Name']}",
+        "Highest Science Marks": f"{df['Science'].max()} by {df.loc[df['Science'].idxmax()]['Name']}",
+        "Highest English Marks": f"{df['English'].max()} by {df.loc[df['English'].idxmax()]['Name']}",
+        "df_for_viz": df
+    }
+    return analysis
+
+def create_visuals_streamlit(analysis_data):
+    avg_data = pd.DataFrame({
+        'Subject': ['Math', 'Science', 'English'],
+        'Average Mark': [
+            analysis_data["Math Average"],
+            analysis_data["Science Average"],
+            analysis_data["English Average"]
+        ]
+    })
+    
+    st.subheader("Subject Average Marks")
+  
+    st.bar_chart(avg_data, x='Subject', y='Average Mark')
+
+    df_viz = analysis_data["df_for_viz"].sort_values(by='Total', ascending=False)
+    
+    st.subheader("Student Total Marks Comparison")
+    df_viz_total = df_viz[['Name', 'Total']].set_index('Name')
+    st.bar_chart(df_viz_total)
+
+def main():
+    
+    st.title("🎓 Marks Analyzer")
+    st.markdown("### Analyze student marks with ease")
+>>>>>>> f0d7049394a36c433188629a8b97a4fa43ac44ff
     menu = ["📝 Add Marks", "📊 View Marks", "📈 Analyze Marks", "❌ Delete Marks"]
     choice = st.selectbox("Select an option", menu)
     
@@ -149,6 +218,7 @@ def main():
         with st.form("add_marks"):
             st.markdown("### Add Student Marks")
             name = st.text_input("Enter student's name")
+<<<<<<< HEAD
             
             # Use columns for a cleaner input layout for 5 subjects
             st.markdown("##### Core Subjects")
@@ -161,6 +231,12 @@ def main():
             col4, col5 = st.columns(2)
             history = col4.number_input("History", min_value=0.0, max_value=MAX_MARKS_PER_SUBJECT, step=0.1)
             art = col5.number_input("Art", min_value=0.0, max_value=MAX_MARKS_PER_SUBJECT, step=0.1)
+=======
+            col1, col2, col3 = st.columns(3)
+            math = col1.number_input("Math marks", min_value=0.0, step=0.1)
+            science = col2.number_input("Science marks", min_value=0.0, step=0.1)
+            english = col3.number_input("English marks", min_value=0.0, step=0.1)
+>>>>>>> f0d7049394a36c433188629a8b97a4fa43ac44ff
 
 
             submitted = st.form_submit_button("Add Marks")
@@ -192,6 +268,7 @@ def main():
         if isinstance(analysis, str):
             st.warning(analysis)
         else:
+<<<<<<< HEAD
             # Removed: Key Statistics (Averages) and Top Performers sections
 
             # Display Pass/Fail Counts (Only key metrics left)
@@ -207,6 +284,26 @@ def main():
             create_visuals_streamlit(analysis)
 
     # --- Delete Marks Section ---
+=======
+            st.markdown("### Key Statistics")
+            
+            col1, col2, col3 = st.columns(3)
+            col1.metric("Math Average", f"{analysis['Math Average']:.2f}")
+            col2.metric("Science Average", f"{analysis['Science Average']:.2f}")
+            col3.metric("English Average", f"{analysis['English Average']:.2f}")
+            
+            st.markdown("---")
+            st.markdown("### Top Performers")
+            st.info(f"**Highest Math Marks:** {analysis['Highest Math Marks']}")
+            st.info(f"**Highest Science Marks:** {analysis['Highest Science Marks']}")
+            st.info(f"**Highest English Marks:** {analysis['Highest English Marks']}")
+            
+            st.markdown("---")
+            
+            st.markdown("### Visual Data Analysis (Streamlit/Pandas)")
+            create_visuals_streamlit(analysis)
+
+>>>>>>> f0d7049394a36c433188629a8b97a4fa43ac44ff
     elif choice == "❌ Delete Marks":
         st.markdown("### Delete Student Marks")
         
@@ -223,7 +320,11 @@ def main():
 
                 student_to_delete = st.selectbox("Select student whose entries you want to delete:", student_names)
                 
+<<<<<<< HEAD
                 st.error(f"⚠️ Are you sure you want to permanently delete ALL records for **{student_to_delete}**?")
+=======
+                st.warning(f"Are you sure you want to permanently delete ALL records for **{student_to_delete}**?")
+>>>>>>> f0d7049394a36c433188629a8b97a4fa43ac44ff
                 
                 submitted = st.form_submit_button("❌ Confirm Delete")
                 
