@@ -2,7 +2,12 @@
 
 This application is a simple, browser-based tool built with Streamlit and Pandas for managing, analyzing, and visualizing student performance data across five subjects.
 
+Screenshot 
+
 ![Marks Analyzer Screenshot](https://github.com/hashircode/marks_analyzer/blob/main/screenshot.png)
+
+[LinkedIn Post](https://www.linkedin.com/posts/muhammad-hashir-485b53376_just-built-a-student-marks-analyzer-web-activity-7385670866681982976-jKu9?utm_source=share&utm_medium=member_android&rcm=ACoAAF0TD-UBgSlbFejRCD4tolGMvkZ_smPvzLY)
+
  
 ✨ Features
 
